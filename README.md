@@ -1,6 +1,8 @@
 # About this Fork
 This fork is a Marlin version, based on the original branch of MKS (board manufacturer), and was created to bring Marlin 2.0 with the easy configurability of Marlin implementation from l3tspeak to TwoTrees printers like the Sapphire Plus an Pro. This brings back the original GUI that originally came with your printer but with full configurability.
 
+Updated source code to Marlin 2.0.9.2, and now MKSwifi works fine. Also added and activated support for BFPTouch.
+
 ## Preconfigured printers:
 - Sapphire Pro
 - Sapphire Plus (Dual-Z and belt-synced versions)
