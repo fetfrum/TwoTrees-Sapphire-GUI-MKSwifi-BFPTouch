@@ -60,11 +60,7 @@
 
 // Core XY
 #define SAPPHIRE_PRO
-// #define INVERT_X
-// #define INVERT_Y
-// #define INVERT_Z
 #define INVERT_E0
-
 //#define SAPPHIRE_PLUS
 //#define SAPPHIRE_PLUS_DUAL_Z //==> Read text since additional config is mandatory
 /****************************************************************************
@@ -116,9 +112,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define MULTIPLE_PROBING_BL   2  // A total of 2 does fast/slow probes with a weighted average.  A total of 3 or more adds more slow probes, taking the average.
 #else
 #if ENABLED(BFP_TOUCH)
-// #define LOW_RES               // 3x3 Grid
-// #define HI_RES                // 5x5 Grid
-#define MAX_RES               // 7x7 Grid
+//#define LOW_RES                  // 3x3 Grid
+#define HI_RES                // 5x5 Grid
+//#define MAX_RES                  // 7x7 Grid
 //#define BL_TOUCH_HIGH_SPEED // Only for BLTouch 3.0 and 3.1 Probe Pin does not pull in when moving in XY. Use at your own risk!
 #define Z_CLEARANCE_BL 5      // Z Clearance between probe points
 #define MULTIPLE_PROBING_BL 2 // A total of 2 does fast/slow probes with a weighted average.  A total of 3 or more adds more slow probes, taking the average.
@@ -127,9 +123,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #endif
 
 // Specify a Probe Offsetposition { X, Y, Z }
-#define OFFSET_X 0   // - Left   |   Right +
-#define OFFSET_Y -42 // - Front  |   Back +
-#define OFFSET_Z 0   // - Nozzle ist Higher as the Probe 0 Point |  + Really? you did somthing wrong.
+#define OFFSET_X 0     // - Left   |   Right +
+#define OFFSET_Y -42   // - Front  |   Back +
+#define OFFSET_Z -1.15 // - Nozzle ist Higher as the Probe 0 Point |  + Really? you did somthing wrong.
 
 // Motion Control Settings
 // New Motion Control              - Classic Jerk [OFF] | S-Curve Acceleration [ON]  | Junction Deviation Factor [ON]
@@ -164,21 +160,18 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //          TMC2208, TMC2208_STANDALONE, TMC2209, TMC2209_STANDALONE,
 //          TMC26X,  TMC26X_STANDALONE,  TMC2660, TMC2660_STANDALONE,
 //          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
-#define CUSTOM_STEPPER_DRIVERS
+//#define CUSTOM_STEPPER_DRIVERS
 #if ENABLED(CUSTOM_STEPPER_DRIVERS)
-#define DRIVER_X TMC2208_STANDALONE
-#define DRIVER_Y TMC2208_STANDALONE
-#define DRIVER_Z A4988
-// #define DRIVER_Y TMC2208_STANDALONE
-// #define DRIVER_Z TMC2208_STANDALONE
-// #define DRIVER_E0 TMC2209_STANDALONE
-#define DRIVER_E0 A4988
+#define DRIVER_X TMC2209_STANDALONE
+#define DRIVER_Y TMC2209_STANDALONE
+#define DRIVER_Z TMC2209_STANDALONE
+#define DRIVER_E0 TMC2209_STANDALONE
 //#define DRIVER_E1 TMC2209_STANDALONE
 //#define DRIVER_Z2 TMC2209_STANDALONE
 
 //#define INVERT_X
 //#define INVERT_Y
-// #define INVERT_Z
+#define INVERT_Z
 // #define INVERT_E0
 #define INVERT_Z2
 //#define INVERT_E1
@@ -482,9 +475,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #if ENABLED(SWITCHING_EXTRUDER)
 #define SWITCHING_EXTRUDER_SERVO_NR 0
 #define SWITCHING_EXTRUDER_SERVO_ANGLES \
-    {                                   \
-        0, 90                           \
-    } // Angles for E0, E1[, E2, E3]
+  {                                     \
+    0, 90                               \
+  } // Angles for E0, E1[, E2, E3]
 #if EXTRUDERS > 3
 #define SWITCHING_EXTRUDER_E23_SERVO_NR 1
 #endif
@@ -496,9 +489,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define SWITCHING_NOZZLE_SERVO_NR 0
 //#define SWITCHING_NOZZLE_E1_SERVO_NR 1          // If two servos are used, the index of the second
 #define SWITCHING_NOZZLE_SERVO_ANGLES \
-    {                                 \
-        0, 90                         \
-    } // Angles for E0, E1 (single servo) or lowered/raised (dual servo)
+  {                                   \
+    0, 90                             \
+  } // Angles for E0, E1 (single servo) or lowered/raised (dual servo)
 #endif
 
 /**
@@ -520,9 +513,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #if EITHER(PARKING_EXTRUDER, MAGNETIC_PARKING_EXTRUDER)
 
 #define PARKING_EXTRUDER_PARKING_X \
-    {                              \
-        -78, 184                   \
-    }                                    // X positions for parking the extruders
+  {                                \
+    -78, 184                       \
+  }                                      // X positions for parking the extruders
 #define PARKING_EXTRUDER_GRAB_DISTANCE 1 // (mm) Distance to move beyond the parking point to grab the extruder
 
 #if ENABLED(PARKING_EXTRUDER)
@@ -573,21 +566,21 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define SWITCHING_TOOLHEAD_Y_SECURITY 10 // (mm) Security distance Y axis
 #define SWITCHING_TOOLHEAD_Y_CLEAR 60    // (mm) Minimum distance from dock for unobstructed X axis
 #define SWITCHING_TOOLHEAD_X_POS \
-    {                            \
-        215, 0                   \
-    } // (mm) X positions for parking the extruders
+  {                              \
+    215, 0                       \
+  } // (mm) X positions for parking the extruders
 #if ENABLED(SWITCHING_TOOLHEAD)
 #define SWITCHING_TOOLHEAD_SERVO_NR 2 // Index of the servo connector
 #define SWITCHING_TOOLHEAD_SERVO_ANGLES \
-    {                                   \
-        0, 180                          \
-    } // (degrees) Angles for Lock, Unlock
+  {                                     \
+    0, 180                              \
+  } // (degrees) Angles for Lock, Unlock
 #elif ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)
 #define SWITCHING_TOOLHEAD_Y_RELEASE 5 // (mm) Security distance Y axis
 #define SWITCHING_TOOLHEAD_X_SECURITY \
-    {                                 \
-        90, 150                       \
-    } // (mm) Security distance X axis (T0,T1)
+  {                                   \
+    90, 150                           \
+  } // (mm) Security distance X axis (T0,T1)
 //#define PRIME_BEFORE_REMOVE                       // Prime the nozzle before release from the dock
 #if ENABLED(PRIME_BEFORE_REMOVE)
 #define SWITCHING_TOOLHEAD_PRIME_MM 20           // (mm)   Extruder prime length
@@ -1376,7 +1369,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define STEPS_Z 1600
 #endif
 #ifndef STEPS_E0
-#define STEPS_E0 430
+#define STEPS_E0 415
 #endif
 #elif ENABLED(SAPPHIRE_PLUS)
 //Sapphire Plus
@@ -1422,10 +1415,10 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #endif
 #endif
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT         \
-    {                                       \
-        STEPS_X, STEPS_Y, STEPS_Z, STEPS_E0 \
-    }
+#define DEFAULT_AXIS_STEPS_PER_UNIT     \
+  {                                     \
+    STEPS_X, STEPS_Y, STEPS_Z, STEPS_E0 \
+  }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1435,28 +1428,28 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #if ANY(SAPPHIRE_PRO, SAPPHIRE_PLUS)
 //Sapphire Pro
 #define DEFAULT_MAX_FEEDRATE \
-    {                        \
-        300, 300, 40, 50     \
-    }
+  {                          \
+    300, 300, 40, 50         \
+  }
 #elif ENABLED(BLUER)
 //Bluer
 #define DEFAULT_MAX_FEEDRATE \
-    {                        \
-        250, 250, 10, 50     \
-    }
+  {                          \
+    250, 250, 10, 50         \
+  }
 #else
 //No Preset
 #define DEFAULT_MAX_FEEDRATE \
-    {                        \
-        300, 300, 10, 50     \
-    }
+  {                          \
+    300, 300, 10, 50         \
+  }
 #endif
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
 #define MAX_FEEDRATE_EDIT_VALUES \
-    {                            \
-        600, 600, 10, 50         \
-    } // ...or, set your own edit limits
+  {                              \
+    600, 600, 10, 50             \
+  } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1466,16 +1459,16 @@ non-belt-synced drives. In this case, a additional configuration has to be done
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_MAX_ACCELERATION \
-    {                            \
-        5000, 5000, 100, 10000   \
-    }
+  {                              \
+    3000, 3000, 100, 10000       \
+  }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-#define MAX_ACCEL_EDIT_VALUES  \
-    {                          \
-        6000, 6000, 200, 20000 \
-    } // ...or, set your own edit limits
+#define MAX_ACCEL_EDIT_VALUES \
+  {                           \
+    6000, 6000, 200, 20000    \
+  } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1539,9 +1532,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define LIMITED_JERK_EDITING // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
 #if ENABLED(LIMITED_JERK_EDITING)
 #define MAX_JERK_EDIT_VALUES \
-    {                        \
-        25, 25, 0.6, 7       \
-    } // ...or, set your own edit limits
+  {                          \
+    25, 25, 0.6, 7           \
+  } // ...or, set your own edit limits
 #endif
 #endif
 
@@ -1639,8 +1632,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define MANUAL_PROBE_START_Z 0.2
 #else
 #if ENABLED(BFP_TOUCH)
-//#define PROBE_MANUALLY
-//#define MANUAL_PROBE_START_Z 0.2
 #else
 // No Adv. Preset
 #define PROBE_MANUALLY
@@ -1665,9 +1656,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
  */
 #define Z_PROBE_SERVO_NR 0 // Defaults to SERVO 0 connector.
 #define Z_SERVO_ANGLES \
-    {                  \
-        110, 60        \
-    } // Z Servo Deploy and Stow angles
+  {                    \
+    110, 60            \
+  } // Z Servo Deploy and Stow angles
 
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
@@ -1772,23 +1763,23 @@ non-belt-synced drives. In this case, a additional configuration has to be done
  */
 #if ENABLED(BL_TOUCH)
 // Adv. Preset Probe BL Touch
-#define NOZZLE_TO_PROBE_OFFSET       \
-    {                                \
-        OFFSET_X, OFFSET_Y, OFFSET_Z \
-    }
+#define NOZZLE_TO_PROBE_OFFSET   \
+  {                              \
+    OFFSET_X, OFFSET_Y, OFFSET_Z \
+  }
 #else
 // BFP_TOUCH
 #if ENABLED(BFP_TOUCH)
-#define NOZZLE_TO_PROBE_OFFSET       \
-    {                                \
-        OFFSET_X, OFFSET_Y, OFFSET_Z \
-    }
+#define NOZZLE_TO_PROBE_OFFSET   \
+  {                              \
+    OFFSET_X, OFFSET_Y, OFFSET_Z \
+  }
 #else
 // No Preset
 #define NOZZLE_TO_PROBE_OFFSET \
-    {                          \
-        0, 0, 0                \
-    }
+  {                            \
+    0, 0, 0                    \
+  }
 #endif
 #endif
 
@@ -1910,16 +1901,16 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
 //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
 #endif
-#define PROBING_FANS_OFF // Turn fans off when probing
+//#define PROBING_FANS_OFF          // Turn fans off when probing
 //#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
 //#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
 //#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
 
 // Require minimum nozzle and/or bed temperature for probing
-#define PREHEAT_BEFORE_PROBING
+//#define PREHEAT_BEFORE_PROBING
 #if ENABLED(PREHEAT_BEFORE_PROBING)
-#define PROBING_NOZZLE_TEMP 160 // (°C) Only applies to E0 at this time
-#define PROBING_BED_TEMP 60
+#define PROBING_NOZZLE_TEMP 120 // (°C) Only applies to E0 at this time
+#define PROBING_BED_TEMP 50
 #endif
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
@@ -2579,9 +2570,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 
 #if ENABLED(LEVEL_BED_CORNERS)
 #define LEVEL_CORNERS_INSET_LFRB \
-    {                            \
-        15, 15, 15, 15           \
-    }                            // (mm) Left, Front, Right, Back insets
+  {                              \
+    15, 15, 15, 15               \
+  }                              // (mm) Left, Front, Right, Back insets
 #define LEVEL_CORNERS_HEIGHT 0.0 // (mm) Z height of nozzle at leveling points
 #define LEVEL_CORNERS_Z_HOP 4.0  // (mm) Z height of nozzle between leveling points
 #define LEVEL_CENTER_TOO         // Move to the center after the last corner
@@ -2610,9 +2601,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
    *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
    */
 #define LEVEL_CORNERS_LEVELING_ORDER \
-    {                                \
-        LF, RF, RB, LB               \
-    }
+  {                                  \
+    LF, RF, RB, LB                   \
+  }
 #endif
 
 /**
@@ -2660,10 +2651,10 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #endif
 
 // Homing speeds (mm/min) (X,Y,Z)
-#define HOMING_FEEDRATE_MM_M           \
-    {                                  \
-        (50 * 60), (50 * 60), (4 * 60) \
-    }
+#define HOMING_FEEDRATE_MM_M        \
+  {                                 \
+    (50 * 60), (50 * 60), (40 * 60) \
+  }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2796,10 +2787,10 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
 // Specify a park position as { X, Y, Z_raise }
-#define NOZZLE_PARK_POINT                      \
-    {                                          \
-        (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 \
-    }
+#define NOZZLE_PARK_POINT                  \
+  {                                        \
+    (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 \
+  }
 //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
 //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
 #define NOZZLE_PARK_Z_RAISE_MIN 2   // (mm) Always raise Z by at least this distance
@@ -2855,18 +2846,18 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 
 // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
 // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-#define NOZZLE_CLEAN_START_POINT    \
-    {                               \
-        {                           \
-            30, 30, (Z_MIN_POS + 1) \
-        }                           \
-    }
-#define NOZZLE_CLEAN_END_POINT       \
-    {                                \
-        {                            \
-            100, 60, (Z_MIN_POS + 1) \
-        }                            \
-    }
+#define NOZZLE_CLEAN_START_POINT \
+  {                              \
+    {                            \
+      30, 30, (Z_MIN_POS + 1)    \
+    }                            \
+  }
+#define NOZZLE_CLEAN_END_POINT \
+  {                            \
+    {                          \
+      100, 60, (Z_MIN_POS + 1) \
+    }                          \
+  }
 
 // Circular pattern radius
 #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5
@@ -3097,8 +3088,8 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
-//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_SUBMENU
 
 //
 // SPEAKER/BUZZER
@@ -3106,7 +3097,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -3585,7 +3576,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // 320x240, 2.8", FSMC Display From MKS
 // Normally used in MKS Robin Nano V1.2
 //
-// #define MKS_ROBIN_TFT28
+//#define MKS_ROBIN_TFT28
 
 //
 // 320x240, 3.2", FSMC Display From MKS
@@ -3643,7 +3634,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //
 // Generic TFT with detailed options
 //
-// #define TFT_GENERIC
+//#define TFT_GENERIC
 #if ENABLED(TFT_GENERIC)
 // :[ 'AUTO', 'ST7735', 'ST7789', 'ST7796', 'R61505', 'ILI9328', 'ILI9341', 'ILI9488' ]
 #define TFT_DRIVER AUTO
@@ -3655,7 +3646,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // TFT Resolution. Enable one of the following options:
 //#define TFT_RES_320x240
 //#define TFT_RES_480x272
-#define TFT_RES_480x320
+//#define TFT_RES_480x320
 //#define TFT_RES_1024x600
 #endif
 
@@ -3896,9 +3887,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
 #define SERVO_DELAY \
-    {               \
-        300         \
-    }
+  {                 \
+    300             \
+  }
 
 // Only power servos during movement, otherwise leave off to prevent jitter
 #define DEACTIVATE_SERVOS_AFTER_MOVE

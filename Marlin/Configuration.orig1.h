@@ -37,7 +37,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02000902
+#define CONFIGURATION_H_VERSION 020008
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -60,11 +60,7 @@
 
 // Core XY
 #define SAPPHIRE_PRO
-// #define INVERT_X
-// #define INVERT_Y
-// #define INVERT_Z
 #define INVERT_E0
-
 //#define SAPPHIRE_PLUS
 //#define SAPPHIRE_PLUS_DUAL_Z //==> Read text since additional config is mandatory
 /****************************************************************************
@@ -116,9 +112,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define MULTIPLE_PROBING_BL   2  // A total of 2 does fast/slow probes with a weighted average.  A total of 3 or more adds more slow probes, taking the average.
 #else
 #if ENABLED(BFP_TOUCH)
-// #define LOW_RES               // 3x3 Grid
-// #define HI_RES                // 5x5 Grid
-#define MAX_RES               // 7x7 Grid
+//#define LOW_RES                  // 3x3 Grid
+#define HI_RES                // 5x5 Grid
+//#define MAX_RES                  // 7x7 Grid
 //#define BL_TOUCH_HIGH_SPEED // Only for BLTouch 3.0 and 3.1 Probe Pin does not pull in when moving in XY. Use at your own risk!
 #define Z_CLEARANCE_BL 5      // Z Clearance between probe points
 #define MULTIPLE_PROBING_BL 2 // A total of 2 does fast/slow probes with a weighted average.  A total of 3 or more adds more slow probes, taking the average.
@@ -127,9 +123,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #endif
 
 // Specify a Probe Offsetposition { X, Y, Z }
-#define OFFSET_X 0   // - Left   |   Right +
-#define OFFSET_Y -42 // - Front  |   Back +
-#define OFFSET_Z 0   // - Nozzle ist Higher as the Probe 0 Point |  + Really? you did somthing wrong.
+#define OFFSET_X 0     // - Left   |   Right +
+#define OFFSET_Y -42   // - Front  |   Back +
+#define OFFSET_Z -1.15 // - Nozzle ist Higher as the Probe 0 Point |  + Really? you did somthing wrong.
 
 // Motion Control Settings
 // New Motion Control              - Classic Jerk [OFF] | S-Curve Acceleration [ON]  | Junction Deviation Factor [ON]
@@ -164,21 +160,18 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //          TMC2208, TMC2208_STANDALONE, TMC2209, TMC2209_STANDALONE,
 //          TMC26X,  TMC26X_STANDALONE,  TMC2660, TMC2660_STANDALONE,
 //          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
-#define CUSTOM_STEPPER_DRIVERS
+//#define CUSTOM_STEPPER_DRIVERS
 #if ENABLED(CUSTOM_STEPPER_DRIVERS)
-#define DRIVER_X TMC2208_STANDALONE
-#define DRIVER_Y TMC2208_STANDALONE
-#define DRIVER_Z A4988
-// #define DRIVER_Y TMC2208_STANDALONE
-// #define DRIVER_Z TMC2208_STANDALONE
-// #define DRIVER_E0 TMC2209_STANDALONE
-#define DRIVER_E0 A4988
+#define DRIVER_X TMC2209_STANDALONE
+#define DRIVER_Y TMC2209_STANDALONE
+#define DRIVER_Z TMC2209_STANDALONE
+#define DRIVER_E0 TMC2209_STANDALONE
 //#define DRIVER_E1 TMC2209_STANDALONE
 //#define DRIVER_Z2 TMC2209_STANDALONE
 
 //#define INVERT_X
 //#define INVERT_Y
-// #define INVERT_Z
+#define INVERT_Z
 // #define INVERT_E0
 #define INVERT_Z2
 //#define INVERT_E1
@@ -336,7 +329,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Igor V. Kruglenko)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(RolfZuckowskiUltras, MKS Robin Nano)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -404,45 +397,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
 
-/**
- * Define the number of coordinated linear axes.
- * See https://github.com/DerAndere1/Marlin/wiki
- * Each linear axis gets its own stepper control and endstop:
- *
- *   Steppers: *_STEP_PIN, *_ENABLE_PIN, *_DIR_PIN, *_ENABLE_ON
- *   Endstops: *_STOP_PIN, USE_*MIN_PLUG, USE_*MAX_PLUG
- *       Axes: *_MIN_POS, *_MAX_POS, INVERT_*_DIR
- *    Planner: DEFAULT_AXIS_STEPS_PER_UNIT, DEFAULT_MAX_FEEDRATE
- *             DEFAULT_MAX_ACCELERATION, AXIS_RELATIVE_MODES,
- *             MICROSTEP_MODES, MANUAL_FEEDRATE
- *
- * :[3, 4, 5, 6]
- */
-//#define LINEAR_AXES 3
-
-/**
- * Axis codes for additional axes:
- * This defines the axis code that is used in G-code commands to
- * reference a specific axis.
- * 'A' for rotational axis parallel to X
- * 'B' for rotational axis parallel to Y
- * 'C' for rotational axis parallel to Z
- * 'U' for secondary linear axis parallel to X
- * 'V' for secondary linear axis parallel to Y
- * 'W' for secondary linear axis parallel to Z
- * Regardless of the settings, firmware-internal axis IDs are
- * I (AXIS4), J (AXIS5), K (AXIS6).
- */
-#if LINEAR_AXES >= 4
-#define AXIS4_NAME 'A' // :['A', 'B', 'C', 'U', 'V', 'W']
-#endif
-#if LINEAR_AXES >= 5
-#define AXIS5_NAME 'B' // :['A', 'B', 'C', 'U', 'V', 'W']
-#endif
-#if LINEAR_AXES >= 6
-#define AXIS6_NAME 'C' // :['A', 'B', 'C', 'U', 'V', 'W']
-#endif
-
 // @section extruder
 
 // This defines the number of extruders
@@ -466,11 +420,11 @@ non-belt-synced drives. In this case, a additional configuration has to be done
  * Multi-Material Unit
  * Set to one of these predefined models:
  *
- *   PRUSA_MMU1           : Průša MMU1 (The "multiplexer" version)
- *   PRUSA_MMU2           : Průša MMU2
- *   PRUSA_MMU2S          : Průša MMU2S (Requires MK3S extruder with motion sensor, EXTRUDERS = 5)
- *   EXTENDABLE_EMU_MMU2  : MMU with configurable number of filaments (ERCF, SMuFF or similar with Průša MMU2 compatible firmware)
- *   EXTENDABLE_EMU_MMU2S : MMUS with configurable number of filaments (ERCF, SMuFF or similar with Průša MMU2 compatible firmware)
+ *   PRUSA_MMU1      : Průša MMU1 (The "multiplexer" version)
+ *   PRUSA_MMU2      : Průša MMU2
+ *   PRUSA_MMU2S     : Průša MMU2S (Requires MK3S extruder with motion sensor, EXTRUDERS = 5)
+ *   SMUFF_EMU_MMU2  : Technik Gegg SMUFF (Průša MMU2 emulation mode)
+ *   SMUFF_EMU_MMU2S : Technik Gegg SMUFF (Průša MMU2S emulation mode)
  *
  * Requires NOZZLE_PARK_FEATURE to park print head in case MMU unit fails.
  * See additional options in Configuration_adv.h.
@@ -524,6 +478,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
         -78, 184                   \
     }                                    // X positions for parking the extruders
 #define PARKING_EXTRUDER_GRAB_DISTANCE 1 // (mm) Distance to move beyond the parking point to grab the extruder
+//#define MANUAL_SOLENOID_CONTROL                   // Manual control of docking solenoids with M380 S / M381
 
 #if ENABLED(PARKING_EXTRUDER)
 
@@ -614,7 +569,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define MIXING_VIRTUAL_TOOLS 16 // Use the Virtual Tool method with M163 and M164
 //#define DIRECT_MIXING_IN_G1    // Allow ABCDHI mix factors in G1 movement commands
 //#define GRADIENT_MIX           // Support for gradient mixing with M166 and LCD
-//#define MIXING_PRESETS         // Assign 8 default V-tool presets for 2 or 3 MIXING_STEPPERS
 #if ENABLED(GRADIENT_MIX)
 //#define GRADIENT_VTOOL       // Add M166 T to use a V-tool index as a Gradient alias
 #endif
@@ -639,9 +593,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
-//#define MKS_PWC                 // Using the MKS PWC add-on
-//#define PS_OFF_CONFIRM          // Confirm dialog when power off
-//#define PS_OFF_SOUND            // Beep 1s when power off
 #define PSU_ACTIVE_STATE LOW // Set 'LOW' for ATX, 'HIGH' for X-Box
 
 //#define PSU_DEFAULT_OFF         // Keep power off until enabled directly with M80
@@ -656,10 +607,8 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define AUTO_POWER_E_FANS
 #define AUTO_POWER_CONTROLLERFAN
 #define AUTO_POWER_CHAMBER_FAN
-#define AUTO_POWER_COOLER_FAN
 //#define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU if any extruder is over this temperature
 //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU if the chamber is over this temperature
-//#define AUTO_POWER_COOLER_TEMP   26 // (°C) Turn on PSU if the cooler is over this temperature
 #define POWER_TIMEOUT 30 // (s) Turn off power if the machine is idle for this duration
 //#define POWER_OFF_DELAY          60 // (s) Delay of poweroff after M81 command. Useful to let fans run for extra time.
 #endif
@@ -671,93 +620,70 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // @section temperature
 
 /**
- * --NORMAL IS 4.7kΩ PULLUP!-- 1kΩ pullup can be used on hotend sensor, using correct resistor and table
+ * --NORMAL IS 4.7kohm PULLUP!-- 1kohm pullup can be used on hotend sensor, using correct resistor and table
  *
  * Temperature sensors available:
  *
- *  SPI RTD/Thermocouple Boards - IMPORTANT: Read the NOTE below!
- *  -------
- *    -5 : MAX31865 with Pt100/Pt1000, 2, 3, or 4-wire  (only for sensors 0-1)
- *                  NOTE: You must uncomment/set the MAX31865_*_OHMS_n defines below.
- *    -3 : MAX31855 with Thermocouple, -200°C to +700°C (only for sensors 0-1)
- *    -2 : MAX6675  with Thermocouple, 0°C to +700°C    (only for sensors 0-1)
- *
- *  NOTE: Ensure TEMP_n_CS_PIN is set in your pins file for each TEMP_SENSOR_n using an SPI Thermocouple. By default,
- *        Hardware SPI on the default serial bus is used. If you have also set TEMP_n_SCK_PIN and TEMP_n_MISO_PIN,
- *        Software SPI will be used on those ports instead. You can force Hardware SPI on the default bus in the
- *        Configuration_adv.h file. At this time, separate Hardware SPI buses for sensors are not supported.
- *
- *  Analog Themocouple Boards
- *  -------
- *    -4 : AD8495 with Thermocouple
- *    -1 : AD595  with Thermocouple
- *
- *  Analog Thermistors - 4.7kΩ pullup - Normal
- *  -------
- *     1 : 100kΩ  EPCOS - Best choice for EPCOS thermistors
- *   331 : 100kΩ  Same as #1, but 3.3V scaled for MEGA
- *   332 : 100kΩ  Same as #1, but 3.3V scaled for DUE
- *     2 : 200kΩ  ATC Semitec 204GT-2
- *   202 : 200kΩ  Copymaster 3D
- *     3 : ???Ω   Mendel-parts thermistor
- *     4 : 10kΩ   Generic Thermistor !! DO NOT use for a hotend - it gives bad resolution at high temp. !!
- *     5 : 100kΩ  ATC Semitec 104GT-2/104NT-4-R025H42G - Used in ParCan, J-Head, and E3D, SliceEngineering 300°C
- *   501 : 100kΩ  Zonestar - Tronxy X3A
- *   502 : 100kΩ  Zonestar - used by hot bed in Zonestar Průša P802M
- *   512 : 100kΩ  RPW-Ultra hotend
- *     6 : 100kΩ  EPCOS - Not as accurate as table #1 (created using a fluke thermocouple)
- *     7 : 100kΩ  Honeywell 135-104LAG-J01
- *    71 : 100kΩ  Honeywell 135-104LAF-J01
- *     8 : 100kΩ  Vishay 0603 SMD NTCS0603E3104FXT
- *     9 : 100kΩ  GE Sensing AL03006-58.2K-97-G1
- *    10 : 100kΩ  RS PRO 198-961
- *    11 : 100kΩ  Keenovo AC silicone mats, most Wanhao i3 machines - beta 3950, 1%
- *    12 : 100kΩ  Vishay 0603 SMD NTCS0603E3104FXT (#8) - calibrated for Makibox hot bed
- *    13 : 100kΩ  Hisens up to 300°C - for "Simple ONE" & "All In ONE" hotend - beta 3950, 1%
- *    15 : 100kΩ  Calibrated for JGAurora A5 hotend
- *    18 : 200kΩ  ATC Semitec 204GT-2 Dagoma.Fr - MKS_Base_DKU001327
- *    22 : 100kΩ  GTM32 Pro vB - hotend - 4.7kΩ pullup to 3.3V and 220Ω to analog input
- *    23 : 100kΩ  GTM32 Pro vB - bed - 4.7kΩ pullup to 3.3v and 220Ω to analog input
- *    30 : 100kΩ  Kis3d Silicone heating mat 200W/300W with 6mm precision cast plate (EN AW 5083) NTC100K - beta 3950
- *    60 : 100kΩ  Maker's Tool Works Kapton Bed Thermistor - beta 3950
- *    61 : 100kΩ  Formbot/Vivedino 350°C Thermistor - beta 3950
- *    66 : 4.7MΩ  Dyze Design High Temperature Thermistor
- *    67 : 500kΩ  SliceEngineering 450°C Thermistor
- *    70 : 100kΩ  bq Hephestos 2
- *    75 : 100kΩ  Generic Silicon Heat Pad with NTC100K MGB18-104F39050L32
- *  2000 : 100kΩ  Ultimachine Rambo TDK NTCG104LH104KT1 NTC100K motherboard Thermistor
- *
- *  Analog Thermistors - 1kΩ pullup - Atypical, and requires changing out the 4.7kΩ pullup for 1kΩ.
- *  -------                           (but gives greater accuracy and more stable PID)
- *    51 : 100kΩ  EPCOS (1kΩ pullup)
- *    52 : 200kΩ  ATC Semitec 204GT-2 (1kΩ pullup)
- *    55 : 100kΩ  ATC Semitec 104GT-2 - Used in ParCan & J-Head (1kΩ pullup)
- *
- *  Analog Thermistors - 10kΩ pullup - Atypical
- *  -------
- *    99 : 100kΩ  Found on some Wanhao i3 machines with a 10kΩ pull-up resistor
- *
- *  Analog RTDs (Pt100/Pt1000)
- *  -------
- *   110 : Pt100  with 1kΩ pullup (atypical)
- *   147 : Pt100  with 4.7kΩ pullup
- *  1010 : Pt1000 with 1kΩ pullup (atypical)
- *  1047 : Pt1000 with 4.7kΩ pullup (E3D)
- *    20 : Pt100  with circuit in the Ultimainboard V2.x with mainboard ADC reference voltage = INA826 amplifier-board supply voltage.
- *                NOTE: (1) Must use an ADC input with no pullup. (2) Some INA826 amplifiers are unreliable at 3.3V so consider using sensor 147, 110, or 21.
- *    21 : Pt100  with circuit in the Ultimainboard V2.x with 3.3v ADC reference voltage (STM32, LPC176x....) and 5V INA826 amplifier board supply.
- *                NOTE: ADC pins are not 5V tolerant. Not recommended because it's possible to damage the CPU by going over 500°C.
- *   201 : Pt100  with circuit in Overlord, similar to Ultimainboard V2.x
- *
- *  Custom/Dummy/Other Thermal Sensors
- *  ------
+ *    -5 : PT100 / PT1000 with MAX31865 (only for sensors 0-1)
+ *    -3 : thermocouple with MAX31855 (only for sensors 0-1)
+ *    -2 : thermocouple with MAX6675 (only for sensors 0-1)
+ *    -4 : thermocouple with AD8495
+ *    -1 : thermocouple with AD595
  *     0 : not used
+ *     1 : 100k thermistor - best choice for EPCOS 100k (4.7k pullup)
+ *   331 : (3.3V scaled thermistor 1 table for MEGA)
+ *   332 : (3.3V scaled thermistor 1 table for DUE)
+ *     2 : 200k thermistor - ATC Semitec 204GT-2 (4.7k pullup)
+ *   202 : 200k thermistor - Copymaster 3D
+ *     3 : Mendel-parts thermistor (4.7k pullup)
+ *     4 : 10k thermistor !! do not use it for a hotend. It gives bad resolution at high temp. !!
+ *     5 : 100K thermistor - ATC Semitec 104GT-2/104NT-4-R025H42G (Used in ParCan, J-Head, and E3D) (4.7k pullup)
+ *   501 : 100K Zonestar (Tronxy X3A) Thermistor
+ *   502 : 100K Zonestar Thermistor used by hot bed in Zonestar Průša P802M
+ *   512 : 100k RPW-Ultra hotend thermistor (4.7k pullup)
+ *     6 : 100k EPCOS - Not as accurate as table 1 (created using a fluke thermocouple) (4.7k pullup)
+ *     7 : 100k Honeywell thermistor 135-104LAG-J01 (4.7k pullup)
+ *    71 : 100k Honeywell thermistor 135-104LAF-J01 (4.7k pullup)
+ *     8 : 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup)
+ *     9 : 100k GE Sensing AL03006-58.2K-97-G1 (4.7k pullup)
+ *    10 : 100k RS thermistor 198-961 (4.7k pullup)
+ *    11 : 100k beta 3950 1% thermistor (Used in Keenovo AC silicone mats and most Wanhao i3 machines) (4.7k pullup)
+ *    12 : 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup) (calibrated for Makibox hot bed)
+ *    13 : 100k Hisens 3950  1% up to 300°C for hotend "Simple ONE " & "Hotend "All In ONE"
+ *    15 : 100k thermistor calibration for JGAurora A5 hotend
+ *    18 : ATC Semitec 204GT-2 (4.7k pullup) Dagoma.Fr - MKS_Base_DKU001327
+ *    20 : Pt100 with circuit in the Ultimainboard V2.x with mainboard ADC reference voltage = INA826 amplifier-board supply voltage.
+ *         NOTES: (1) Must use an ADC input with no pullup. (2) Some INA826 amplifiers are unreliable at 3.3V so consider using sensor 147, 110, or 21.
+ *    21 : Pt100 with circuit in the Ultimainboard V2.x with 3.3v ADC reference voltage (STM32, LPC176x....) and 5V INA826 amplifier board supply.
+ *         NOTE: ADC pins are not 5V tolerant. Not recommended because it's possible to damage the CPU by going over 500°C.
+ *    22 : 100k (hotend) with 4.7k pullup to 3.3V and 220R to analog input (as in GTM32 Pro vB)
+ *    23 : 100k (bed) with 4.7k pullup to 3.3v and 220R to analog input (as in GTM32 Pro vB)
+ *    30 : Kis3d Silicone heating mat 200W/300W with 6mm precision cast plate (EN AW 5083) NTC100K / B3950 (4.7k pullup)
+ *   201 : Pt100 with circuit in Overlord, similar to Ultimainboard V2.x
+ *    60 : 100k Maker's Tool Works Kapton Bed Thermistor beta=3950
+ *    61 : 100k Formbot / Vivedino 3950 350C thermistor 4.7k pullup
+ *    66 : 4.7M High Temperature thermistor from Dyze Design
+ *    67 : 450C thermistor from SliceEngineering
+ *    70 : the 100K thermistor found in the bq Hephestos 2
+ *    75 : 100k Generic Silicon Heat Pad with NTC 100K MGB18-104F39050L32 thermistor
+ *    99 : 100k thermistor with a 10K pull-up resistor (found on some Wanhao i3 machines)
+ *
+ *       1k ohm pullup tables - This is atypical, and requires changing out the 4.7k pullup for 1k.
+ *                              (but gives greater accuracy and more stable PID)
+ *    51 : 100k thermistor - EPCOS (1k pullup)
+ *    52 : 200k thermistor - ATC Semitec 204GT-2 (1k pullup)
+ *    55 : 100k thermistor - ATC Semitec 104GT-2 (Used in ParCan & J-Head) (1k pullup)
+ *
+ *  1047 : Pt1000 with 4k7 pullup (E3D)
+ *  1010 : Pt1000 with 1k pullup (non standard)
+ *   147 : Pt100 with 4k7 pullup
+ *   110 : Pt100 with 1k pullup (non standard)
+ *
  *  1000 : Custom - Specify parameters in Configuration_adv.h
  *
- *   !!! Use these for Testing or Development purposes. NEVER for production machine. !!!
+ *         Use these for Testing or Development purposes. NEVER for production machine.
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
- *
  */
 #ifdef CUSTOM_TEMP_SENSOR_0
 #define TEMP_SENSOR_0 CUSTOM_TEMP_SENSOR_0
@@ -774,6 +700,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #else
 #define TEMP_SENSOR_BED 1
 #endif
+
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
@@ -783,9 +710,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define TEMP_SENSOR_BED 1
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
-#define TEMP_SENSOR_COOLER 0
-#define TEMP_SENSOR_BOARD 0
-#define TEMP_SENSOR_REDUNDANT 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
@@ -793,9 +717,14 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 
 // Resistor values when using MAX31865 sensors (-5) on TEMP_SENSOR_0 / 1
 //#define MAX31865_SENSOR_OHMS_0      100   // (Ω) Typically 100 or 1000 (PT100 or PT1000)
-//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for Adafruit PT100; 4300 for Adafruit PT1000
+//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for AdaFruit PT100; 4300 for AdaFruit PT1000
 //#define MAX31865_SENSOR_OHMS_1      100
 //#define MAX31865_CALIBRATION_OHMS_1 430
+
+// Use temp sensor 1 as a redundant sensor with sensor 0. If the readings
+// from the two sensors differ too much the print will be aborted.
+//#define TEMP_SENSOR_1_AS_REDUNDANT
+#define MAX_REDUNDANT_TEMP_SENSOR_DIFF 10
 
 #define TEMP_RESIDENCY_TIME 10 // (seconds) Time to wait for hotend to "settle" in M109
 #define TEMP_WINDOW 3          // (°C) Temperature proximity for the "temperature reached" timer
@@ -804,26 +733,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define TEMP_BED_RESIDENCY_TIME 5 // (seconds) Time to wait for bed to "settle" in M190
 #define TEMP_BED_WINDOW 3         // (°C) Temperature proximity for the "temperature reached" timer
 #define TEMP_BED_HYSTERESIS 3     // (°C) Temperature proximity considered "close enough" to the target
-
-#define TEMP_CHAMBER_RESIDENCY_TIME 10 // (seconds) Time to wait for chamber to "settle" in M191
-#define TEMP_CHAMBER_WINDOW 1          // (°C) Temperature proximity for the "temperature reached" timer
-#define TEMP_CHAMBER_HYSTERESIS 3      // (°C) Temperature proximity considered "close enough" to the target
-
-/**
- * Redundant Temperature Sensor (TEMP_SENSOR_REDUNDANT)
- *
- * Use a temp sensor as a redundant sensor for another reading. Select an unused temperature sensor, and another
- * sensor you'd like it to be redundant for. If the two thermistors differ by TEMP_SENSOR_REDUNDANT_MAX_DIFF (°C),
- * the print will be aborted. Whichever sensor is selected will have its normal functions disabled; i.e. selecting
- * the Bed sensor (-1) will disable bed heating/monitoring.
- *
- * For selecting source/target use: COOLER, PROBE, BOARD, CHAMBER, BED, E0, E1, E2, E3, E4, E5, E6, E7
- */
-#if TEMP_SENSOR_REDUNDANT
-#define TEMP_SENSOR_REDUNDANT_SOURCE E1   // The sensor that will provide the redundant reading.
-#define TEMP_SENSOR_REDUNDANT_TARGET E0   // The sensor that we are providing a redundant reading for.
-#define TEMP_SENSOR_REDUNDANT_MAX_DIFF 10 // (°C) Temperature difference that will trigger a print abort.
-#endif
 
 // Below this temperature the heater will be switched off
 // because it probably indicates a broken thermistor wire.
@@ -836,12 +745,16 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define HEATER_6_MINTEMP 5
 #define HEATER_7_MINTEMP 5
 #define BED_MINTEMP 5
-#define CHAMBER_MINTEMP 5
 
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
+#if ENABLED(E3D_HEMERA)
+#define HEATER_0_MAXTEMP 300
+#else
 #define HEATER_0_MAXTEMP 275
+#endif
+
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -850,17 +763,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
 #define BED_MAXTEMP 125
-#define CHAMBER_MAXTEMP 60
-
-/**
- * Thermal Overshoot
- * During heatup (and printing) the temperature can often "overshoot" the target by many degrees
- * (especially before PID tuning). Setting the target temperature too close to MAXTEMP guarantees
- * a MAXTEMP shutdown! Use these values to forbid temperatures being set too close to MAXTEMP.
- */
-#define HOTEND_OVERSHOOT 15 // (°C) Forbid temperatures over MAXTEMP - OVERSHOOT
-#define BED_OVERSHOOT 10    // (°C) Forbid temperatures over MAXTEMP - OVERSHOOT
-#define COOLER_OVERSHOOT 2  // (°C) Forbid temperatures closer than OVERSHOOT
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -913,6 +815,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define DEFAULT_Ki 1.08
 #define DEFAULT_Kd 114
 #endif
+
 #endif // PIDTEMP
 
 //===========================================================================
@@ -975,59 +878,16 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define DEFAULT_bedKi .023
 #define DEFAULT_bedKd 305.4
 #endif
-// FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
 
-//===========================================================================
-//==================== PID > Chamber Temperature Control ====================
-//===========================================================================
-
-/**
- * PID Chamber Heating
- *
- * If this option is enabled set PID constants below.
- * If this option is disabled, bang-bang will be used and CHAMBER_LIMIT_SWITCHING will enable
- * hysteresis.
- *
- * The PID frequency will be the same as the extruder PWM.
- * If PID_dT is the default, and correct for the hardware/configuration, that means 7.689Hz,
- * which is fine for driving a square wave into a resistive load and does not significantly
- * impact FET heating. This also works fine on a Fotek SSR-10DA Solid State Relay into a 200W
- * heater. If your configuration is significantly different than this and you don't understand
- * the issues involved, don't use chamber PID until someone else verifies that your hardware works.
- */
-//#define PIDTEMPCHAMBER
-//#define CHAMBER_LIMIT_SWITCHING
-
-/**
- * Max Chamber Power
- * Applies to all forms of chamber control (PID, bang-bang, and bang-bang with hysteresis).
- * When set to any value below 255, enables a form of PWM to the chamber heater that acts like a divider
- * so don't use it unless you are OK with PWM on your heater. (See the comment on enabling PIDTEMPCHAMBER)
- */
-#define MAX_CHAMBER_POWER 255 // limits duty cycle to chamber heater; 255=full current
-
-#if ENABLED(PIDTEMPCHAMBER)
-#define MIN_CHAMBER_POWER 0
-//#define PID_CHAMBER_DEBUG // Sends debug data to the serial port.
-
-// Lasko "MyHeat Personal Heater" (200w) modified with a Fotek SSR-10DA to control only the heating element
-// and placed inside the small Creality printer enclosure tent.
-//
-#define DEFAULT_chamberKp 37.04
-#define DEFAULT_chamberKi 1.40
-#define DEFAULT_chamberKd 655.17
-// M309 P37.04 I1.04 D655.17
-
-// FIND YOUR OWN: "M303 E-2 C8 S50" to run autotune on the chamber at 50 degreesC for 8 cycles.
-#endif // PIDTEMPCHAMBER
-
-#if ANY(PIDTEMP, PIDTEMPBED, PIDTEMPCHAMBER)
+#if EITHER(PIDTEMP, PIDTEMPBED)
 //#define PID_DEBUG             // Sends debug data to the serial port. Use 'M303 D' to toggle activation.
 //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
 //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-// If the temperature difference between the target temperature and the actual temperature
-// is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
+/*
+ * If the temperature difference between the target temperature and the actual temperature 
+ * is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
+ */
 #define PID_FUNCTIONAL_RANGE 10
 #endif
 
@@ -1070,7 +930,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
 #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
 #define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
-#define THERMAL_PROTECTION_COOLER  // Enable thermal protection for the laser cooling
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -1080,6 +939,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 
 // Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
+
 #if ANY(SAPPHIRE_PRO, SAPPHIRE_PLUS)
 //Sapphire Pro & Plus
 #define COREXY
@@ -1096,17 +956,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define COREYX
 //#define COREZX
 //#define COREZY
-//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
-#endif
-
-// Enable for a belt style printer with endless "Z" motion
-//#define BELTPRINTER
-
-// Enable for Polargraph Kinematics
-//#define POLARGRAPH
-#if ENABLED(POLARGRAPH)
-#define POLARGRAPH_MAX_BELT_LEN 1035.0
-#define POLAR_SEGMENTS_PER_SECOND 5
 #endif
 
 //===========================================================================
@@ -1118,6 +967,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // Specify here all the endstop connectors that are connected to any endstop or probe.
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
+
 #if ANY(SAPPHIRE_PRO, SAPPHIRE_PLUS) && NONE(SAPPHIRE_PLUS_DUAL_Z)
 //Sapphire Pro & Plus
 #define USE_XMIN_PLUG
@@ -1139,32 +989,21 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
-//#define USE_IMIN_PLUG
-//#define USE_JMIN_PLUG
-//#define USE_KMIN_PLUG
 //#define USE_XMAX_PLUG
 //#define USE_YMAX_PLUG
 //#define USE_ZMAX_PLUG
-//#define USE_IMAX_PLUG
-//#define USE_JMAX_PLUG
-//#define USE_KMAX_PLUG
+#endif
 
 // Enable pullup for all endstops to prevent a floating state
 // #define ENDSTOPPULLUPS
 #if DISABLED(ENDSTOPPULLUPS)
 // Disable ENDSTOPPULLUPS to set pullups individually
-//#define ENDSTOPPULLUP_ZMIN
-//#define ENDSTOPPULLUP_IMIN
-//#define ENDSTOPPULLUP_JMIN
-//#define ENDSTOPPULLUP_KMIN
 //#define ENDSTOPPULLUP_XMAX
 //#define ENDSTOPPULLUP_YMAX
 //#define ENDSTOPPULLUP_ZMAX
 #define ENDSTOPPULLUP_XMIN
 #define ENDSTOPPULLUP_YMIN
-//#define ENDSTOPPULLUP_IMAX
-//#define ENDSTOPPULLUP_JMAX
-//#define ENDSTOPPULLUP_KMAX
+//#define ENDSTOPPULLUP_ZMIN
 //#define ENDSTOPPULLUP_ZMIN_PROBE
 #endif
 
@@ -1178,14 +1017,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define ENDSTOPPULLDOWN_XMIN
 //#define ENDSTOPPULLDOWN_YMIN
 //#define ENDSTOPPULLDOWN_ZMIN
-//#define ENDSTOPPULLDOWN_IMIN
-//#define ENDSTOPPULLDOWN_JMIN
-//#define ENDSTOPPULLDOWN_KMIN
-//#define ENDSTOPPULLDOWN_IMAX
-//#define ENDSTOPPULLDOWN_JMAX
-//#define ENDSTOPPULLDOWN_KMAX
 //#define ENDSTOPPULLDOWN_ZMIN_PROBE
-#endif
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
@@ -1212,16 +1044,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //No Preset
 #define X_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define I_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define J_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define K_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define X_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define I_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define J_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define K_MAX_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
 #endif
 
@@ -1376,7 +1201,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define STEPS_Z 1600
 #endif
 #ifndef STEPS_E0
-#define STEPS_E0 430
+#define STEPS_E0 415
 #endif
 #elif ENABLED(SAPPHIRE_PLUS)
 //Sapphire Plus
@@ -1451,6 +1276,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
         300, 300, 10, 50     \
     }
 #endif
+
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
 #define MAX_FEEDRATE_EDIT_VALUES \
@@ -1639,8 +1465,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define MANUAL_PROBE_START_Z 0.2
 #else
 #if ENABLED(BFP_TOUCH)
-//#define PROBE_MANUALLY
-//#define MANUAL_PROBE_START_Z 0.2
 #else
 // No Adv. Preset
 #define PROBE_MANUALLY
@@ -1797,13 +1621,13 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define PROBING_MARGIN 10
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_FEEDRATE 10500
+#define XY_PROBE_SPEED 10500
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (4 * 60)
+#define Z_PROBE_SPEED_FAST (4 * 60)
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 4)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 4)
 
 /**
  * Probe Activation Switch
@@ -1908,18 +1732,16 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define PROBING_HEATERS_OFF       // Turn heaters off when probing
 #if ENABLED(PROBING_HEATERS_OFF)
 //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
-//#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
 #endif
-#define PROBING_FANS_OFF // Turn fans off when probing
-//#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
-//#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
+//#define PROBING_FANS_OFF          // Turn fans off when probing
+//#define PROBING_STEPPERS_OFF      // Turn steppers off (unless needed to hold position) when probing
 //#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
 
 // Require minimum nozzle and/or bed temperature for probing
-#define PREHEAT_BEFORE_PROBING
+//#define PREHEAT_BEFORE_PROBING
 #if ENABLED(PREHEAT_BEFORE_PROBING)
-#define PROBING_NOZZLE_TEMP 160 // (°C) Only applies to E0 at this time
-#define PROBING_BED_TEMP 60
+#define PROBING_NOZZLE_TEMP 120 // (°C) Only applies to E0 at this time
+#define PROBING_BED_TEMP 50
 #endif
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
@@ -1928,18 +1750,12 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define Y_ENABLE_ON 0
 #define Z_ENABLE_ON 0
 #define E_ENABLE_ON 0 // For all extruders
-//#define I_ENABLE_ON 0
-//#define J_ENABLE_ON 0
-//#define K_ENABLE_ON 0
 
 // Disable axis steppers immediately when they're not being stepped.
 // WARNING: When motors turn off there is a chance of losing position accuracy!
 #define DISABLE_X false
 #define DISABLE_Y false
 #define DISABLE_Z false
-//#define DISABLE_I false
-//#define DISABLE_J false
-//#define DISABLE_K false
 
 // Turn off the display blinking that warns about possible accuracy reduction
 //#define DISABLE_REDUCED_ACCURACY_WARNING
@@ -2065,9 +1881,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define INVERT_Z_DIR true
 #else
 #define INVERT_Z_DIR false
-//#define INVERT_I_DIR false
-//#define INVERT_J_DIR false
-//#define INVERT_K_DIR false
 #endif
 
 // @section extruder
@@ -2104,7 +1917,8 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // @section homing
 
 #define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed
-#define Z_IDLE_HEIGHT Z_MAX_POS // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
+
+#define UNKNOWN_Z_NO_RAISE // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 /*
  * (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ... 
  * Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
@@ -2237,9 +2051,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
 #define Z_HOME_DIR -1
-//#define I_HOME_DIR -1
-//#define J_HOME_DIR -1
-//#define K_HOME_DIR -1
 
 // @section machine
 
@@ -2254,13 +2065,8 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 200
-//#define I_MIN_POS 0
-//#define I_MAX_POS 50
-//#define J_MIN_POS 0
-//#define J_MAX_POS 50
-//#define K_MIN_POS 0
-//#define K_MAX_POS 50
 #endif
+
 /**
  * Software Endstops
  *
@@ -2276,9 +2082,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define MIN_SOFTWARE_ENDSTOP_X
 #define MIN_SOFTWARE_ENDSTOP_Y
 //#define MIN_SOFTWARE_ENDSTOP_Z
-#define MIN_SOFTWARE_ENDSTOP_I
-#define MIN_SOFTWARE_ENDSTOP_J
-#define MIN_SOFTWARE_ENDSTOP_K
 #endif
 
 // Max software endstops constrain movement within maximum coordinate bounds
@@ -2287,9 +2090,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define MAX_SOFTWARE_ENDSTOP_X
 #define MAX_SOFTWARE_ENDSTOP_Y
 #define MAX_SOFTWARE_ENDSTOP_Z
-#define MAX_SOFTWARE_ENDSTOP_I
-#define MAX_SOFTWARE_ENDSTOP_J
-#define MAX_SOFTWARE_ENDSTOP_K
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
@@ -2317,8 +2117,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define FIL_RUNOUT_STATE LOW // Pin state indicating that filament is NOT present.
 #define FIL_RUNOUT_PULLUP    // Use internal pullup for filament runout pins.
 //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
-//#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
-// This is automatically enabled for MIXING_EXTRUDERs.
 
 // Override individually if the runout sensors vary
 //#define FIL_RUNOUT1_STATE LOW
@@ -2353,9 +2151,8 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define FIL_RUNOUT8_PULLUP
 //#define FIL_RUNOUT8_PULLDOWN
 
-// Commands to execute on filament runout.
-// With multiple runout sensors use the %c placeholder for the current tool in commands (e.g., "M600 T%c")
-// NOTE: After 'M412 H1' the host handles filament runout and this script does not apply.
+// Set one or more commands to execute on filament runout.
+// (After 'M412 H' Marlin will ask the host to handle the process.)
 #define FILAMENT_RUNOUT_SCRIPT "M600"
 
 // After a runout is detected, continue printing this length of filament
@@ -2434,16 +2231,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
  * leveling immediately after G28.
  */
 #define RESTORE_LEVELING_AFTER_G28
-//#define ENABLE_LEVELING_AFTER_G28
-
-/**
- * Auto-leveling needs preheating
- */
-//#define PREHEAT_BEFORE_LEVELING
-#if ENABLED(PREHEAT_BEFORE_LEVELING)
-#define LEVELING_NOZZLE_TEMP 120 // (°C) Only applies to E0 at this time
-#define LEVELING_BED_TEMP 50
-#endif
 
 /**
  * Enable detailed logging of G28, G29, M48, etc.
@@ -2451,11 +2238,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
  * NOTE: Requires a lot of PROGMEM!
  */
 //#define DEBUG_LEVELING_FEATURE
-
-#if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
-// Set a height for the start of manual adjustment
-#define MANUAL_PROBE_START_Z 0.2 // (mm) Comment out to use the last-measured height
-#endif
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_BILINEAR, AUTO_BED_LEVELING_UBL)
 // Gradually reduce leveling correction until a set height is reached,
@@ -2475,7 +2257,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-//#define G26_MESH_VALIDATION
+// #define G26_MESH_VALIDATION
 #if ENABLED(G26_MESH_VALIDATION)
 #define MESH_TEST_NOZZLE_SIZE 0.4  // (mm) Diameter of primary nozzle.
 #define MESH_TEST_LAYER_HEIGHT 0.2 // (mm) Default layer height for G26.
@@ -2538,15 +2320,11 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #define GRID_MAX_POINTS_X 3 // Don't use more than 15 points per axis, implementation limited.
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-//#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
-
 #define UBL_MESH_EDIT_MOVES_Z   // Sophisticated users prefer no movement of nozzle
 #define UBL_SAVE_ACTIVE_ON_M500 // Save the currently active mesh in the current slot on M500
 
 //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // When the nozzle is off the mesh, this value is used
 // as the Z-Height correction value.
-
-//#define UBL_MESH_WIZARD         // Run several commands in a row to get a complete mesh
 
 #elif ENABLED(MESH_BED_LEVELING)
 
@@ -2631,9 +2409,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define MANUAL_X_HOME_POS 0
 //#define MANUAL_Y_HOME_POS 0
 //#define MANUAL_Z_HOME_POS 0
-//#define MANUAL_I_HOME_POS 0
-//#define MANUAL_J_HOME_POS 0
-//#define MANUAL_K_HOME_POS 0
 
 // Use "Z Safe Homing" to avoid homing with a Z probe outside the bed area.
 //
@@ -2660,9 +2435,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #endif
 
 // Homing speeds (mm/min) (X,Y,Z)
-#define HOMING_FEEDRATE_MM_M           \
-    {                                  \
-        (50 * 60), (50 * 60), (4 * 60) \
+#define HOMING_FEEDRATE_MM_M            \
+    {                                   \
+        (50 * 60), (50 * 60), (40 * 60) \
     }
 
 // Validate that endstops are triggered on homing moves
@@ -2896,20 +2671,11 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 /**
  * Print Job Timer
  *
- * Automatically start and stop the print job timer on M104/M109/M140/M190/M141/M191.
- * The print job timer will only be stopped if the bed/chamber target temp is
- * below BED_MINTEMP/CHAMBER_MINTEMP.
+ * Automatically start and stop the print job timer on M104/M109/M190.
  *
- *   M104 (hotend, no wait)  - high temp = none,        low temp = stop timer
- *   M109 (hotend, wait)     - high temp = start timer, low temp = stop timer
- *   M140 (bed, no wait)     - high temp = none,        low temp = stop timer
- *   M190 (bed, wait)        - high temp = start timer, low temp = none
- *   M141 (chamber, no wait) - high temp = none,        low temp = stop timer
- *   M191 (chamber, wait)    - high temp = start timer, low temp = none
- *
- * For M104/M109, high temp is anything over EXTRUDE_MINTEMP / 2.
- * For M140/M190, high temp is anything over BED_MINTEMP.
- * For M141/M191, high temp is anything over CHAMBER_MINTEMP.
+ *   M104 (hotend, no wait) - high temp = none,        low temp = stop timer
+ *   M109 (hotend, wait)    - high temp = start timer, low temp = stop timer
+ *   M190 (bed, wait)       - high temp = start timer, low temp = none
  *
  * The timer can also be controlled with the following commands:
  *
@@ -2988,22 +2754,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 /**
  * LCD Character Set
  *
- * Note: This option is NOT applicable to Graphical Displays.
- *
- * All character-based LCDs provide ASCII plus one of these
- * language extensions:
- *
  *  - JAPANESE ... the most common
  *  - WESTERN  ... with more accented characters
  *  - CYRILLIC ... for the Russian language
- *
- * To determine the language extension installed on your controller:
- *
- *  - Compile and upload with LCD_LANGUAGE set to 'test'
- *  - Click the controller to view the LCD menu
- *  - The LCD will display Japanese, Western, or Cyrillic text
- *
- * See https://marlinfw.org/docs/development/lcd_language.html
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
@@ -3097,8 +2850,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
-//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -3106,7 +2858,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -3130,14 +2882,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // Note: Usually sold with a white PCB.
 //
 //#define REPRAP_DISCOUNT_SMART_CONTROLLER
-
-//
-// GT2560 (YHCB2004) LCD Display
-//
-// Requires Testato, Koepel softwarewire library and
-// Andriy Golovnya's LiquidCrystal_AIP31068 library.
-//
-//#define YHCB2004
 
 //
 // Original RADDS LCD Display+Encoder+SDCardReader
@@ -3290,11 +3034,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
-// K.3D Full Graphic Smart Controller
-//
-//#define K3D_FULL_GRAPHIC_SMART_CONTROLLER
-
-//
 // ReprapWorld Graphical LCD
 // https://reprapworld.com/?products_details&products_id/1218
 //
@@ -3356,17 +3095,10 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define MKS_MINI_12864
 
 //
-// MKS MINI12864 V3 is an alias for FYSETC_MINI_12864_2_1. Type A/B. NeoPixel RGB Backlight.
-//
-//#define MKS_MINI_12864_V3
-
-//
 // MKS LCD12864A/B with graphic controller and SD support. Follows MKS_MINI_12864 pinout.
 // https://www.aliexpress.com/item/33018110072.html
 //
 //#define MKS_LCD12864
-//#define MKS_LCD12864A
-//#define MKS_LCD12864B
 
 //
 // FYSETC variant of the MINI12864 graphic controller with SD support
@@ -3468,11 +3200,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // Where to find : https://www.aliexpress.com/item/4000345255731.html
 //#define FYSETC_242_OLED_12864   // Uses the SSD1309 controller
 
-//
-// K.3D SSD1309 OLED 2.42" 128×64 Full Graphics Controller
-//
-//#define K3D_242_OLED_CONTROLLER   // Software SPI
-
 //=============================================================================
 //========================== Extensible UI Displays ===========================
 //=============================================================================
@@ -3481,42 +3208,10 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // DGUS Touch Display with DWIN OS. (Choose one.)
 // ORIGIN : https://www.aliexpress.com/item/32993409517.html
 // FYSETC : https://www.aliexpress.com/item/32961471929.html
-// MKS    : https://www.aliexpress.com/item/1005002008179262.html
-//
-// Flash display with DGUS Displays for Marlin:
-//  - Format the SD card to FAT32 with an allocation size of 4kb.
-//  - Download files as specified for your type of display.
-//  - Plug the microSD card into the back of the display.
-//  - Boot the display and wait for the update to complete.
-//
-// ORIGIN (Marlin DWIN_SET)
-//  - Download https://github.com/coldtobi/Marlin_DGUS_Resources
-//  - Copy the downloaded DWIN_SET folder to the SD card.
-//
-// FYSETC (Supplier default)
-//  - Download https://github.com/FYSETC/FYSTLCD-2.0
-//  - Copy the downloaded SCREEN folder to the SD card.
-//
-// HIPRECY (Supplier default)
-//  - Download https://github.com/HiPrecy/Touch-Lcd-LEO
-//  - Copy the downloaded DWIN_SET folder to the SD card.
-//
-// MKS (MKS-H43) (Supplier default)
-//  - Download https://github.com/makerbase-mks/MKS-H43
-//  - Copy the downloaded DWIN_SET folder to the SD card.
-//
-// RELOADED (T5UID1)
-//  - Download https://github.com/Desuuuu/DGUS-reloaded/releases
-//  - Copy the downloaded DWIN_SET folder to the SD card.
 //
 //#define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
-//#define DGUS_LCD_UI_MKS
-//#define DGUS_LCD_UI_RELOADED
-#if ENABLED(DGUS_LCD_UI_MKS)
-#define USE_MKS_GREEN_UI
-#endif
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
@@ -3540,14 +3235,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
 #define LCD_SERIAL_PORT 3 // Default is 3 for Anycubic
 //#define ANYCUBIC_LCD_DEBUG
-#endif
-
-//
-// 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
-//
-//#define NEXTION_TFT
-#if ENABLED(NEXTION_TFT)
-#define LCD_SERIAL_PORT 1 // Default is 1 for Nextion
 #endif
 
 //
@@ -3585,7 +3272,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // 320x240, 2.8", FSMC Display From MKS
 // Normally used in MKS Robin Nano V1.2
 //
-// #define MKS_ROBIN_TFT28
+//#define MKS_ROBIN_TFT28
 
 //
 // 320x240, 3.2", FSMC Display From MKS
@@ -3636,14 +3323,9 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define ANET_ET5_TFT35
 
 //
-// 1024x600, 7", RGB Stock Display from BIQU-BX
-//
-//#define BIQU_BX_TFT70
-
-//
 // Generic TFT with detailed options
 //
-// #define TFT_GENERIC
+//#define TFT_GENERIC
 #if ENABLED(TFT_GENERIC)
 // :[ 'AUTO', 'ST7735', 'ST7789', 'ST7796', 'R61505', 'ILI9328', 'ILI9341', 'ILI9488' ]
 #define TFT_DRIVER AUTO
@@ -3655,8 +3337,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 // TFT Resolution. Enable one of the following options:
 //#define TFT_RES_320x240
 //#define TFT_RES_480x272
-#define TFT_RES_480x320
-//#define TFT_RES_1024x600
+//#define TFT_RES_480x320
 #endif
 
 /**
@@ -3705,30 +3386,12 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define DWIN_CREALITY_LCD
 
 //
-// Ender-3 v2 OEM display, enhanced.
-//
-//#define DWIN_CREALITY_LCD_ENHANCED
-
-//
-// Ender-3 v2 OEM display with enhancements by Jacob Myers
-//
-//#define DWIN_CREALITY_LCD_JYERSUI
-
-//
-// MarlinUI for Creality's DWIN display (and others)
-//
-//#define DWIN_MARLINUI_PORTRAIT
-//#define DWIN_MARLINUI_LANDSCAPE
-
-//
-// Touch Screen Settings
+// ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
 //
 #define TOUCH_SCREEN
 #if ENABLED(TOUCH_SCREEN)
 #define BUTTON_DELAY_EDIT 50  // (ms) Button repeat delay for edit screens
 #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
-
-//#define TOUCH_IDLE_SLEEP 300 // (secs) Turn off the TFT backlight if set (5mn)
 
 #define TOUCH_SCREEN_CALIBRATION
 
@@ -3737,10 +3400,6 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 //#define TOUCH_OFFSET_X        -43
 //#define TOUCH_OFFSET_Y        257
 //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
-
-#if BOTH(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
-#define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
-#endif
 
 #if ENABLED(TFT_COLOR_UI)
 //#define SINGLE_TOUCH_NAVIGATION
@@ -3841,30 +3500,23 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 #endif
 
 #if ENABLED(NEOPIXEL_LED)
-#define NEOPIXEL_TYPE NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
-//#define NEOPIXEL_PIN     4     // LED driving pin
-//#define NEOPIXEL2_TYPE NEOPIXEL_TYPE
-//#define NEOPIXEL2_PIN    5
-#define NEOPIXEL_PIXELS 30      // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
-#define NEOPIXEL_IS_SEQUENTIAL  // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
-#define NEOPIXEL_BRIGHTNESS 127 // Initial brightness (0-255)
-//#define NEOPIXEL_STARTUP_TEST  // Cycle through colors at startup
+#define NEOPIXEL_TYPE TYPE       // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
+#define NEOPIXEL_PIN NEO_PIXEL_1 // LED driving pin
+//#define NEOPIXEL2_TYPE TYPE
+//#define NEOPIXEL2_PIN    NEO_PIXEL_2
+#define NEOPIXEL_PIXELS PIXELS // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
+//#define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
+#define NEOPIXEL_BRIGHTNESS BRIGHTNESS // Initial brightness (0-255)
 
-// Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
-//#define NEOPIXEL2_SEPARATE
-#if ENABLED(NEOPIXEL2_SEPARATE)
-#define NEOPIXEL2_PIXELS 15      // Number of LEDs in the second strip
-#define NEOPIXEL2_BRIGHTNESS 127 // Initial brightness (0-255)
-#define NEOPIXEL2_STARTUP_TEST   // Cycle through colors at startup
+#if ENABLED(STARTUP_TEST)
+#define NEOPIXEL_STARTUP_TEST // Cycle through colors at startup
 #else
-//#define NEOPIXEL2_INSERIES      // Default behavior is NeoPixel 2 in parallel
+//#define NEOPIXEL_STARTUP_TEST  // Cycle through colors at startup
 #endif
 
-// Use some of the NeoPixel LEDs for static (background) lighting
-//#define NEOPIXEL_BKGD_INDEX_FIRST  0              // Index of the first background LED
-//#define NEOPIXEL_BKGD_INDEX_LAST   5              // Index of the last background LED
-//#define NEOPIXEL_BKGD_COLOR { 255, 255, 255, 0 }  // R, G, B, W
-//#define NEOPIXEL_BKGD_ALWAYS_ON                   // Keep the backlight on when other NeoPixels are off
+// Use a single Neopixel LED for static (background) lighting
+//#define NEOPIXEL_BKGD_LED_INDEX  0               // Index of the LED to use
+//#define NEOPIXEL_BKGD_COLOR { 255, 255, 255, 0 } // R, G, B, W
 #endif
 
 /**
@@ -3878,7 +3530,7 @@ non-belt-synced drives. In this case, a additional configuration has to be done
  *  - Change to green once print has finished
  *  - Turn off after the print has finished and the user has pushed a button
  */
-#if ANY(BLINKM, RGB_LED, RGBW_LED, PCA9632, PCA9533, NEOPIXEL_LED)
+#if ANY(BLINKM, RGB_LED, RGBW_LED, PCA9632, PCA9533, NEOPIXEL_LED, PRINTER_STATUS_LEDS)
 #define PRINTER_EVENT_LEDS
 #endif
 
@@ -3905,6 +3557,3 @@ non-belt-synced drives. In this case, a additional configuration has to be done
 
 // Edit servo angles with M281 and save to EEPROM with M500
 //#define EDITABLE_SERVO_ANGLES
-
-// Disable servo with M282 to reduce power consumption, noise, and heat when not in use
-//#define SERVO_DETACH_GCODE
